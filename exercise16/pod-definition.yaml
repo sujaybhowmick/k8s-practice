@@ -1,0 +1,21 @@
+# Create a configMap 'cmvolume' with values 'var8=val8', 'var9=val9'. Load this as a volume inside
+# an nginx pod on path '/etc/lala'. Create the pod and 'ls' into the '/etc/lala' directory.
+# $ kubectl create cm cmvolume --from-literal=var8=val8 --from-literal=var9=val9
+# $ kubectl exec nginx -it -- /bin/sh
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  namespace: default
+spec:
+  volumes:
+    - name: config-volume
+      configMap:
+        name: cmvolume
+  containers:
+    - name: nginx
+      image: nginx
+      volumeMounts:
+        - mountPath: /etc/lala
+          name: config-volume
+  restartPolicy: Never

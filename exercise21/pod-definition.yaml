@@ -1,0 +1,21 @@
+# Delete the pod you just created and mount the variable 'username' from secret mysecret2 onto a
+# new nginx pod in env variable called 'USERNAME'
+# $ kubectl create secret generic mysecret2 --from-file=username
+# $ kubectl exec nginx -it -- env
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  namespace: default
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      env:
+        - name: USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: username
+              name: mysecret2
+  restartPolicy: Never
+

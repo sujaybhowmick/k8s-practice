@@ -1,0 +1,12 @@
+# Create a service that exposes the deployment on port 6262. 
+# Verify its existence, check the endpoints
+apiVersion: v1
+kind: Service
+metadata:
+  name: foo-svc
+spec:
+  selector:
+    app: foo
+  ports:
+  - port: 6262
+    targetPort: 8080

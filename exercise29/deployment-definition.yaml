@@ -1,0 +1,26 @@
+# Create a deployment called foo using image 'dgkanatsios/simpleapp' (a simple server that returns hostname) 
+# and 3 replicas. Label it as 'app=foo'. Declare that containers in this pod will accept traffic on port 8080 
+# (do NOT create a service yet)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: foo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: foo
+  template:
+    metadata:
+      labels:
+        app: foo
+    spec:
+      containers:
+      - name: foo
+        image: dgkanatsios/simpleapp
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080

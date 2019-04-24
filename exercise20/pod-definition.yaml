@@ -1,0 +1,20 @@
+# Create an nginx pod that mounts the secret mysecret2 in a volume on path /etc/foo
+# $ kubectl create secret generic mysecret2 --from-file=username
+# $ kubectl exec nginx -it -- /bin/sh
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: default
+  name: nginx
+spec:
+  volumes:
+    - name: myvolume
+      secret:
+        secretName: mysecret2
+  containers:
+    - name: nginx
+      image: nginx
+      volumeMounts:
+        - mountPath: /etc/foo
+          name: myvolume
+  restartPolicy: Never

@@ -1,0 +1,29 @@
+# Create a busybox pod with command 'sleep 3600', save it on pod.yaml. Mount the PersistentVolumeClaim to '/etc/foo'. 
+# Connect to the 'busybox' pod, and copy the '/etc/passwd' file to '/etc/foo'.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox2
+  labels:
+    name: busybox2
+spec:
+  volumes:
+    - name: myvolume
+      persistentVolumeClaim:
+        claimName: mypvc
+  containers:
+  - name: busybox2
+    image: busybox
+    args:
+      - /bin/sh
+      - -c
+      - sleep 3600
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 80
+    volumeMounts:
+      - name: myvolume
+        mountPath: /etc/foo

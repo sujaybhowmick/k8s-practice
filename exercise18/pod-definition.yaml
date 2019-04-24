@@ -1,0 +1,16 @@
+# Create the YAML for an nginx pod that has the capabilities "NET_ADMIN", "SYS_TIME" added on its
+# single container
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: default
+  name: nginx
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      securityContext:
+        capabilities:
+          add: ["NET_ADMIN", "SYS_TIME"]
+  restartPolicy: Never
+

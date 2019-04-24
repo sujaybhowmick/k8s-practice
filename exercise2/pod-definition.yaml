@@ -1,0 +1,14 @@
+# Create a busybox pod (using kubectl command) that runs the command "env". Run it and see the output
+# $ kubectl run busybox --image=busybox --restart=Never --dry-run -o yaml --command  -- env > envpod.yaml
+# $ kubectl logs busybox
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+  namespace: default
+spec:
+  containers:
+    - name: busybox
+      image: busybox
+      command:
+        - "env"

@@ -1,0 +1,10 @@
+# Answer - Pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  namespace: mynamespace
+spec:
+  containers:
+    - name: ngnix
+      image: nginx

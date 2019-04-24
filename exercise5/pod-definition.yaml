@@ -1,0 +1,13 @@
+# Create an nginx pod and set an env value as 'var1=val1'. Check the env value existence within the pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  namespace: default
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      env:
+        - name: var1
+          value: val1

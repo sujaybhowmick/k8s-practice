@@ -1,0 +1,15 @@
+# Create a job with the image busybox that executes the command 'echo hello;sleep 30;echo world'
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: busybox-job
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - name: busybox-job
+          image: busybox
+          command: ["/bin/sh"]
+          args: ["-c", "echo hello; sleep 30; echo world"]
+      restartPolicy: OnFailure

@@ -1,0 +1,25 @@
+# Create a deployment with image nginx:1.7.8, called nginx, having 2 replicas,
+# defining port 80 as the port that this container exposes
+# (don't create a service for this deployment)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      name: nginx
+      namespace: default
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.7.8
+          ports:
+            - containerPort: 80
+  replicas: 2

@@ -1,0 +1,12 @@
+# Create an nginx pod that uses 'myuser' as a service account
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  namespace: default
+spec:
+  serviceAccountName: myuser
+  containers:
+    - name: nginx
+      image: nginx
+  restartPolicy: Never

@@ -1,0 +1,11 @@
+# resource-quota-definition.yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: myresourcequota
+  namespace: default
+spec:
+  hard:
+    cpu: "1"
+    memory: 1G
+    pods: "2"

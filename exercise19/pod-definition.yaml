@@ -1,0 +1,18 @@
+# Create an nginx pod with requests cpu=100m,memory=256Mi and limits cpu=200m,memory=512Mi
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  namespace: default
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "256Mi"
+        limits:
+          cpu: "200m"
+          memory: "512Mi"
+  restartPolicy: Never

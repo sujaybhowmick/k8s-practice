@@ -1,0 +1,17 @@
+# Create the same job, but make it run 5 parallel times
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: busybox-job
+  namespace: default
+spec:
+  completions: 5
+  parallelism: 5
+  template:
+    spec:
+      containers:
+        - name: busybox-job
+          image: busybox
+          command: ["/bin/sh"]
+          args: ["-c", "echo hello; sleep 30; echo world"]
+      restartPolicy: OnFailure

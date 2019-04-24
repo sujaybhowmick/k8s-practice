@@ -1,0 +1,14 @@
+# Create a busybox pod that runs 'i=0; while true; do echo "$i: $(date)"; i=$((i+1)); sleep 1; done'.
+# Check its logs
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+  namespace: default
+spec:
+  containers:
+    - name: busybox
+      image: busybox
+      command: ["/bin/sh"]
+      args: ["-c", "i=0; while true; do echo \"$i: $(date)\"; i=$((i+1)); sleep 1; done"]
+  restartPolicy: Never

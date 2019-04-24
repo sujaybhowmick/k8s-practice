@@ -1,0 +1,14 @@
+# Create a NetworkPolicy so that only pods with labels 'access: true' can access the deployment and apply it
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: access-nginx
+spec:
+  podSelector:
+    matchLabels:
+      app: nginx
+  ingress:
+    - from:
+      - podSelector:
+          matchLabels:
+            access: 'true'

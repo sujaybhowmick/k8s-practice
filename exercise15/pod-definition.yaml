@@ -1,0 +1,17 @@
+# Create a configMap 'anotherone' with values 'var6=val6', 'var7=val7'. Load this configMap as
+# env variables into a new nginx pod
+# $ kubectl create configmap anotherone --from-literal=var6=val6 --from-literal=var7=val7
+# $ kubectl exec nginx -it -- env (check env variables)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  namespace: default
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      envFrom:
+        - configMapRef:
+            name: anotherone
+  restartPolicy: Never

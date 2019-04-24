@@ -1,0 +1,19 @@
+# Create a cron job with image busybox that runs on a schedule of "*/1 * * * *" and writes 'date;
+# echo Hello from the Kubernetes cluster' to standard output
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: busybox-cronjob
+  namespace: default
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: busybox-cronjob
+              image: busybox
+              command: ["/bin/sh"]
+              args: ["-c", "date; echo Hello from Kubernetes cluster"]
+          restartPolicy: OnFailure

@@ -1,0 +1,21 @@
+# pod-volume-aws-definition.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: rand-num-gen
+  namespace: default
+spec:
+  containers:
+    - name: alpine
+      image: alpine
+      command: ["/bin/sh" "-c"]
+      args: ["shuf -i 0-100 -n 1 >> /opt/number.out;"]
+      volumeMounts:
+        - mountPath: /opt
+          name: data-volume
+
+  volumes:
+    - name: data-volume
+      awsElasticBlockStore:
+        volumeID: <volume-id>
+        fsType: ext4

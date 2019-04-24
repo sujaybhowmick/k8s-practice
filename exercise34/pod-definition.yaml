@@ -1,0 +1,34 @@
+# Create a Pod with two containers, both with image busybox and command "echo hello; sleep 3600". 
+# Connect to the second container and run 'ls'.
+# $ kubeclt exec busybox -c busybox2 -it -- /bin/sh
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+  labels:
+    name: busybox
+spec:
+  volumes:
+    - name: myvolume
+      emptyDir: {}
+  containers:
+  - name: busybox
+    image: busybox
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 80
+    command: ["/bin/sh"]
+    args: ["-c", "echo hello; sleep 3600"]
+  - name: busybox2
+    image: busybox
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 80
+    command: ["/bin/sh"]
+    args: ["-c", "echo hello; sleep 3600"]

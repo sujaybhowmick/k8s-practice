@@ -1,0 +1,14 @@
+# Create a job with image perl that runs default command with arguments "perl -Mbignum=bpi -wle 'print bpi(2000)'"
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: perl
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+        - name: perl
+          image: perl
+          command: ["perl", "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+      restartPolicy: Never

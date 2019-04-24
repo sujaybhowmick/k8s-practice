@@ -1,0 +1,11 @@
+# Create an nginx deployment of 2 replicas, expose it via a ClusterIP service on port 80. 
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-svc
+spec:
+  selector:
+    app: nginx
+  ports:
+  - port: 80
+    targetPort: 80
