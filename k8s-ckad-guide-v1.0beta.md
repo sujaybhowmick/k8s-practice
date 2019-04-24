@@ -536,7 +536,7 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
-	name: mynamespace
+  name: mynamespace
 ```
 
 ```yaml
