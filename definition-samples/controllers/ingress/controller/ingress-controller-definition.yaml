@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-ingress-controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-ingress-controller
+  template:
+    metadata:
+      labels:
+        app: nginx-ingress-controller
+    spec:
+      containers:
+      - name: nginx-ingress-controller
+        image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.24.1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+        args:
+          - /nginx-ingress-controller
+          - --configmap=$(POD_NAMESPACE)/nginx-configuration
