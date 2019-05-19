@@ -1,0 +1,41 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sidecar-logging
+  labels:
+    app: logging
+spec:
+  containers:
+  - name: busybox-main
+    image: busybox
+    args:
+    - /bin/sh
+    - -c
+    - >
+      i=0;
+        while true;
+        do
+          echo "$i: $(date)" >> /var/log/1.log;
+          echo "$(date) INFO $i" >> /var/log/2.log;
+          i=$((i+1));
+          sleep 1;
+        done
+    volumeMounts:
+    - name: logvol
+      mountPath: /var/log
+  - name: busybox-sidecar1
+    image: busybox
+    args: [/bin/sh, -c, tail -n+1 -f /var/log/1.log]
+    volumeMounts:
+    - name: logvol
+      mountPath: /var/log
+  - name: busybox-sidecar2
+    image: busybox
+    args: [/bin/sh, -c, tail -n+1 -f /var/log/2.log]
+    volumeMounts:
+    - name: logvol
+      mountPath: /var/log
+  volumes:
+  - name: logvol
+    emptyDir: {}

@@ -531,26 +531,26 @@ spec:
 
 1. Create a namespace called *'mynamespace'* and a pod with image *nginx* called *nginx* on this namespace
 
-```yaml
-# Answer - Namespace
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: mynamespace
-```
+   ```yaml
+   # Answer - Namespace
+   apiVersion: v1
+   kind: Namespace
+   metadata:
+     name: mynamespace
+   ```
 
-```yaml
-# Answer - Pod
-apiVersion: v1
-kind: Pod
-metadata:
-  name: nginx
-  namespace: mynamespace
-spec:
-  containers:
-    - name: ngnix
-      image: nginx
-```
+   ```yaml
+   # Answer - Pod
+   apiVersion: v1
+   kind: Pod
+   metadata:
+     name: nginx
+     namespace: mynamespace
+   spec:
+     containers:
+       - name: ngnix
+         image: nginx
+   ```
 
 2. Create a busybox pod (using kubectl command) that runs the command "env". Run it and see the output
 
@@ -1782,3 +1782,4 @@ spec:
    ls
    exit
    ```
+
